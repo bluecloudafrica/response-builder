@@ -1,0 +1,31 @@
+{
+    "name": "bluecloud/response-builder",
+    "description": "API response builder",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "BlueCloud Solutions",
+            "email": "info@bluecloud.africa"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Bluecloud\\ResponseBuilder\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bluecloud\\ResponseBuilder\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bluecloud\\ResponseBuilder\\ResponseBuilderServiceProvider"
+            ]
+        }
+    },
+}
