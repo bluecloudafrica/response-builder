@@ -4,6 +4,8 @@
 namespace Bluecloud\ResponseBuilder;
 
 
+use Illuminate\Http\JsonResponse;
+
 class ResponseBuilder
 {
     private $message = "";
@@ -30,20 +32,20 @@ class ResponseBuilder
         return $this;
     }
 
-    public function data(array $data)
+    public function data($data)
     {
         $this->data = $data;
         return $this;
     }
 
-    public function toJson()
+    public function toJson(): JsonResponse
     {
         return $this->build();
     }
 
-    public function build()
+    public function build(): JsonResponse
     {
-        return response([
+        return response()->json([
             "message" => $this->message,
             "errors" => sizeof($this->errors) == 0 ? null : $this->errors,
             $this->key => sizeof($this->data) == 0 ? null : $this->data
