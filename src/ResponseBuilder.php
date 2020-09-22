@@ -43,6 +43,11 @@ class ResponseBuilder
         return $this->build();
     }
 
+    public function json(): JsonResponse
+    {
+        return $this->build();
+    }
+    
     public function build(): JsonResponse
     {
         return response()->json([
