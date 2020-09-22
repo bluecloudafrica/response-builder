@@ -5,7 +5,9 @@ namespace Bluecloud\ResponseBuilder\Traits;
 
 
 use Bluecloud\ResponseBuilder\ResponseBuilder;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Response;
 use Throwable;
 
 trait RenderExceptions
@@ -17,6 +19,8 @@ trait RenderExceptions
         $builder = (new ResponseBuilder())->failed($exception->getMessage());
 
         if ($exception->getCode() >= 200 || $exception->getCode() < 599) $builder->status($exception->getCode());
+
+        if ($exception instanceof AuthenticationException) $builder->status(Response::HTTP_UNAUTHORIZED);
 
         return $builder->build();
     }
