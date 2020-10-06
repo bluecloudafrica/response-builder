@@ -8,13 +8,15 @@ use Bluecloud\ResponseBuilder\ResponseBuilder;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 trait RenderExceptions
 {
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof ModelNotFoundException) return (new ResponseBuilder())->notFound()->build();
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException)
+            return (new ResponseBuilder())->notFound()->build();
 
         $builder = (new ResponseBuilder())->failed($exception->getMessage());
 
