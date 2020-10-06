@@ -20,6 +20,8 @@ trait RenderExceptions
 
         if ($exception->getCode() >= 200 || $exception->getCode() < 599) $builder->status($exception->getCode());
 
+        if ($exception->getMessage() == "") $builder->message("Error while processing your request");
+
         if ($exception instanceof AuthenticationException) $builder->status(Response::HTTP_UNAUTHORIZED);
 
         return $builder->build();
