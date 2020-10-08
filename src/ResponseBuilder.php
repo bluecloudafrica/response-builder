@@ -12,7 +12,7 @@ class ResponseBuilder
     private $status = 200;
     private $errors = [];
     private $key = "data";
-    private $data = [];
+    private $data = null;
 
     public function message(string $message)
     {
@@ -47,13 +47,13 @@ class ResponseBuilder
     {
         return $this->build();
     }
-    
+
     public function build(): JsonResponse
     {
         return response()->json([
             "message" => $this->message,
             "errors" => sizeof($this->errors) == 0 ? null : $this->errors,
-            $this->key => sizeof($this->data) == 0 ? null : $this->data
+            $this->key => $this->data
         ], $this->status);
     }
 
