@@ -10,10 +10,6 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {
-        "php": ">=7.2",
-        "laravel/framework": "^7.24"
-    },
     "autoload": {
         "psr-4": {
             "Bluecloud\\ResponseBuilder\\": "src/"

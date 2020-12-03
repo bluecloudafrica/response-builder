@@ -52,7 +52,7 @@ class ResponseBuilder
     {
         return response()->json([
             "message" => $this->message,
-            "errors" => sizeof($this->errors) == 0 ? null : $this->errors,
+            "errors" => $this->errors,
             $this->key => $this->data
         ], $this->status);
     }
@@ -75,7 +75,7 @@ class ResponseBuilder
         return $this;
     }
 
-    public function ok(array $data = [])
+    public function ok($data = [])
     {
         $this->status = 200;
         $this->data = $data;
