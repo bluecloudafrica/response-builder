@@ -12,6 +12,7 @@ class ResponseBuilder
     private $status = 200;
     private $errors = [];
     private $key = "data";
+    private $trace = [];
     private $data = null;
 
     public function message(string $message)
@@ -38,6 +39,12 @@ class ResponseBuilder
         return $this;
     }
 
+    public function trace($trace)
+    {
+        $this->trace = $trace;
+        return $this;
+    }
+
     public function toJson(): JsonResponse
     {
         return $this->build();
@@ -53,6 +60,7 @@ class ResponseBuilder
         return response()->json([
             "message" => $this->message,
             "errors" => $this->errors,
+            "trace" => $this->trace,
             $this->key => $this->data
         ], $this->status);
     }
