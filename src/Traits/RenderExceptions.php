@@ -20,7 +20,11 @@ trait RenderExceptions
 
         $builder = (new ResponseBuilder())->failed($exception->getMessage());
 
-        if ($exception->getCode() >= 200 || $exception->getCode() < 599) $builder->status($exception->getCode());
+        if (is_numeric($exception->getCode())) {
+            if ($exception->getCode() >= 200 || $exception->getCode() < 599) $builder->status($exception->getCode());
+        } else {
+            $builder->status(500);
+        }
 
         if ($exception->getMessage() == "") $builder->message("Error while processing your request");
 
