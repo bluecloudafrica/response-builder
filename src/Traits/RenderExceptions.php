@@ -20,7 +20,7 @@ trait RenderExceptions
 
         $builder = (new ResponseBuilder())->failed($exception->getMessage());
 
-        if (app()->environment('local')) $builder->trace($exception->getTrace());
+        if (config('app.debug')) $builder->trace($exception->getTrace());
 
         if (is_numeric($exception->getCode())) {
             if ($exception->getCode() >= 200 || $exception->getCode() < 599) $builder->status($exception->getCode());
