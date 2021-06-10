@@ -106,6 +106,13 @@ class ResponseBuilder
         return $this;
     }
 
+    public function serviceUnavailable($message = 'The service is unavailable'): self
+    {
+        $this->status = 503;
+        $this->message = $message;
+        return $this;
+    }
+
     public function unauthenticated($message = "Unauthenticated")
     {
         $this->status = 401;
