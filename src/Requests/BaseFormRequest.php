@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 abstract class BaseFormRequest extends FormRequest
 {
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
