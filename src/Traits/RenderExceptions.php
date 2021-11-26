@@ -7,18 +7,20 @@ namespace Bluecloud\ResponseBuilder\Traits;
 use Bluecloud\ResponseBuilder\ResponseBuilder;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 trait RenderExceptions
 {
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $exception): JsonResponse
     {
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException)
             return (new ResponseBuilder())->notFound()->build();
 
-        $builder = (new ResponseBuilder())->failed($exception->getMessage());
+        $message = config('app.debug') ? $exception->getMessage() : 'Error while processing your request';
+        $builder = (new ResponseBuilder())->failed($message);
 
         if (config('app.debug')) $builder->trace($exception->getTrace());
 
