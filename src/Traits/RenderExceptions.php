@@ -16,6 +16,8 @@ trait RenderExceptions
 {
     public function render($request, Throwable $exception): JsonResponse
     {
+        $failureMessage = 'Error while processing your request';
+
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException)
             return (new ResponseBuilder())->notFound()->build();
 
@@ -30,7 +32,7 @@ trait RenderExceptions
             $builder->status(500);
         }
 
-        if ($exception->getMessage() == "") $builder->message("Error while processing your request");
+        if ($exception->getMessage() == "") $builder->message($failureMessage);
 
         if ($exception instanceof AuthenticationException) $builder->status(Response::HTTP_UNAUTHORIZED);
 

@@ -5,11 +5,12 @@ namespace Bluecloud\ResponseBuilder\Traits;
 
 use Bluecloud\ResponseBuilder\ResponseBuilder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Throwable;
 
 trait BuildExceptionHandler
 {
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $exception): JsonResponse
     {
         if ($exception instanceof ModelNotFoundException) return (new ResponseBuilder())->notFound()->build();
 

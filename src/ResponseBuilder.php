@@ -15,31 +15,31 @@ class ResponseBuilder
     private $trace = [];
     private $data = null;
 
-    public function message(string $message)
+    public function message(string $message): self
     {
         $this->message = $message;
         return $this;
     }
 
-    public function status(int $status)
+    public function status(int $status): self
     {
         $this->status = $status >= 100 && $status < 512 ? $status : 500;
         return $this;
     }
 
-    public function key(string $key)
+    public function key(string $key): self
     {
         $this->key = $key;
         return $this;
     }
 
-    public function data($data)
+    public function data($data): self
     {
         $this->data = $data;
         return $this;
     }
 
-    public function trace($trace)
+    public function trace($trace): self
     {
         $this->trace = $trace;
         return $this;
@@ -65,7 +65,7 @@ class ResponseBuilder
         ], $this->status);
     }
 
-    public function errors(array $errors)
+    public function errors(array $errors): self
     {
         $this->errors = $errors;
         return $this;
@@ -75,7 +75,7 @@ class ResponseBuilder
     /*
      * Helper Methods
      * */
-    public function created(array $data)
+    public function created(array $data): self
     {
         $this->status = 201;
         $this->data = $data;
@@ -83,7 +83,7 @@ class ResponseBuilder
         return $this;
     }
 
-    public function ok($data = [])
+    public function ok($data = []): self
     {
         $this->status = 200;
         $this->data = $data;
@@ -91,7 +91,7 @@ class ResponseBuilder
         return $this;
     }
 
-    public function accepted(array $data = [])
+    public function accepted(array $data = []): self
     {
         $this->status = 202;
         $this->data = $data;
@@ -99,7 +99,7 @@ class ResponseBuilder
         return $this;
     }
 
-    public function failed($message)
+    public function failed($message): self
     {
         $this->status = 500;
         $this->message = $message;
@@ -113,7 +113,7 @@ class ResponseBuilder
         return $this;
     }
 
-    public function unauthenticated($message = "Unauthenticated")
+    public function unauthenticated($message = "Unauthenticated"): self
     {
         $this->status = 401;
         $this->message = $message;
@@ -121,28 +121,28 @@ class ResponseBuilder
     }
 
     //unauthorized
-    public function unauthorized($message = "Forbidden")
+    public function unauthorized($message = "Forbidden"): self
     {
         $this->status = 403;
         $this->message = $message;
         return $this;
     }
 
-    public function notFound($message = "resource not found")
+    public function notFound($message = "resource not found"): self
     {
         $this->status = 404;
         $this->message = $message;
         return $this;
     }
 
-    public function badRequest($message = "bad request")
+    public function badRequest($message = "bad request"): self
     {
         $this->status = 400;
         $this->message = $message;
         return $this;
     }
 
-    public function unprocessable($message = "Failed to process request")
+    public function unprocessable($message = "Failed to process request"): self
     {
         $this->status = 422;
         $this->message = $message;
