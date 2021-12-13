@@ -8,7 +8,7 @@ use Bluecloud\ResponseBuilder\ResponseBuilder;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -21,10 +21,8 @@ trait RenderExceptions
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException)
             return (new ResponseBuilder())->notFound()->build();
 
-        if ($exception instanceof \PDOException)
-            return (new ResponseBuilder())->failed($failureMessage)->json();
-
-        $builder = (new ResponseBuilder())->failed($exception->getMessage());
+        $message = config('app.debug') ? $exception->getMessage() : $failureMessage;
+        $builder = (new ResponseBuilder())->failed($message);
 
         if (config('app.debug')) $builder->trace($exception->getTrace());
 
