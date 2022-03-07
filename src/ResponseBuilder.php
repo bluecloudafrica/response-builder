@@ -79,7 +79,7 @@ class ResponseBuilder
     {
         $this->status = 201;
         $this->data = $data;
-        $this->message = "resource created";
+        $this->message = "Resource created";
         return $this;
     }
 
@@ -87,7 +87,7 @@ class ResponseBuilder
     {
         $this->status = 200;
         $this->data = $data;
-        $this->message = "request successful";
+        $this->message = "Completed successfully";
         return $this;
     }
 
@@ -95,7 +95,7 @@ class ResponseBuilder
     {
         $this->status = 202;
         $this->data = $data;
-        $this->message = "request accepted and processing";
+        $this->message = "Request accepted and processing";
         return $this;
     }
 
@@ -128,14 +128,14 @@ class ResponseBuilder
         return $this;
     }
 
-    public function notFound($message = "resource not found"): self
+    public function notFound($message = "Resource not found"): self
     {
         $this->status = 404;
         $this->message = $message;
         return $this;
     }
 
-    public function badRequest($message = "bad request"): self
+    public function badRequest($message = "Bad request"): self
     {
         $this->status = 400;
         $this->message = $message;
