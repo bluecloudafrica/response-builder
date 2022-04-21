@@ -20,9 +20,14 @@ abstract class BaseFormRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            "message" => "Validation failed",
+            "message" => $this->getErrorMessage(),
             "errors" => collect($this->validator->getMessageBag()),
             "data" => null
         ], Response::HTTP_BAD_REQUEST));
+    }
+
+    protected function getErrorMessage(): string
+    {
+        return "The given data is invalid.";
     }
 }
