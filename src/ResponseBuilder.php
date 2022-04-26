@@ -148,4 +148,11 @@ class ResponseBuilder
         $this->message = $message;
         return $this;
     }
+
+    public function preconditionFailed(string $message = 'Precondition failed'): self
+    {
+        $this->status = 412;
+        $this->message = $message;
+        return $this;
+    }
 }
