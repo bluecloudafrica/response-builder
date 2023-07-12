@@ -34,7 +34,7 @@ trait RenderExceptions
 
         if ($exception->getMessage() == "") $builder->message($failureMessage);
 
-        if ($exception instanceof AuthenticationException) $builder->status(Response::HTTP_UNAUTHORIZED);
+        if ($exception instanceof AuthenticationException) $builder->status(Response::HTTP_UNAUTHORIZED)->message('Unauthenticated');
 
         return $builder->build();
     }
